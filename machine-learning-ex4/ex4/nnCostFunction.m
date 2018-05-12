@@ -63,12 +63,12 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 %feedforward the network
-X = [ones(m,1) X]; % m x 401
-a1 = sigmoid(X*Theta1'); 
-a1 = [ones(m, 1) a1]; % m x 26
-a2 = sigmoid(a1*Theta2'); % m x 10 
-h = a2;
-
+a1 = [ones(m,1) X]; % m x 401
+z2 = a1*Theta1';
+a2 = [ones(m,1) sigmoid(z2)]; % m x 26
+z3 = a2*Theta2';
+a3 = sigmoid(z3); % m x 10
+h = a3;
 
 %recode Y into a m x 10 binary matrix from a m x 1 input vector
 Y = zeros(num_labels, m); 
@@ -82,17 +82,27 @@ J = 1/m*sum(sum((-Y)'.*log(h)-(1-Y').*log(1-h)));
 
 %regularization...make sure to exclude the bias layer from calculation 
 reg = lambda/(2*m)*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
-
 %cost with regularization
 J = J+reg;
 
+%backprop
+delta3 = a3'-Y; % 10 x m
+delta2 = (Theta2'*delta3).*[ones(m,1) sigmoidGradient(z2)]'; % 26 x m
 
+%calculate gradients
+Theta1_grad = 1/m*(delta2(2:end, :)*a1); % 25 x 401
+Theta2_grad = 1/m*(delta3*a2); % 10 x 26
 
+%calculate regularization value
+T1_reg = lambda/m*Theta1(:,2:end);
+%add a column of zeros to accomodate for the bias layer
+T1_reg = [zeros(size(T1_reg, 1), 1) T1_reg];
+%repeat for Theta2
+T2_reg = lambda/m*Theta2(:,2:end);
+T2_reg = [zeros(size(T2_reg, 1), 1) T2_reg];
 
-
-
-
-% -------------------------------------------------------------
+Theta1_grad = Theta1_grad + T1_reg;
+Theta2_grad = Theta2_grad + T2_reg;
 
 % =========================================================================
 
