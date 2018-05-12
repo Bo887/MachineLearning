@@ -35,6 +35,7 @@ h = sigmoid(X*all_theta');
 % classify each element as the one with the highest probability, so just find the index of the max element in each row
 [max_, max_indices] = max(h, [], 2);
 p = max_indices;
+p
 
 % =========================================================================
 
