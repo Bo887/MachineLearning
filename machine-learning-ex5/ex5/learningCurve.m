@@ -53,10 +53,16 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-
-
-
-
+%train for each training set size from 1 to m
+for i = 1:m
+	%train for only the first i training data
+	theta = trainLinearReg(X(1:i, :), y(1:i, :), lambda);
+	%for error evaluation, there is no regularization (lambda = 0)
+	%training error only includes the first i inputs
+	error_train(i) = linearRegCostFunction(X(1:i, :), y(1:i, :), theta, 0);
+	%validation error uses the entire validation dataset
+	error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 
 % -------------------------------------------------------------
