@@ -15,7 +15,8 @@ sim = 0;
 %               sigma
 %
 %
-
+norm = sum((x2-x1).^2);
+sim = e^(-norm/(2*sigma^2));
 
 
 
