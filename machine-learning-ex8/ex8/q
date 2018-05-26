@@ -1,0 +1,38 @@
+
+Checking Gradients (without regularization) ... 
+   -0.08269    0.00000
+    1.15434    0.00000
+    1.58735    0.00000
+   -0.44750    0.00000
+   -1.54278    0.00000
+   -1.35223    0.00000
+    0.14641    0.00000
+   -2.07286    0.00000
+    1.79183    0.00000
+  -10.21135    0.00000
+    0.59109    0.00000
+    1.88614    0.00000
+    0.07631    0.00000
+    0.08065    0.00000
+    2.41589    0.00000
+   -3.08183    0.00000
+   -0.19972    0.00000
+    0.07327    0.00000
+   -0.05702    0.00000
+   -0.51729    0.00000
+    1.18875    0.00000
+   -2.96508    0.00000
+   -0.51108    0.00000
+   -0.16789    0.00000
+   -4.83190    0.00000
+    5.90712    0.00000
+   -1.17944    0.00000
+The above two columns you get should be very similar.
+(Left-Your Numerical Gradient, Right-Analytical Gradient)
+
+If your cost function implementation is correct, then 
+the relative difference will be small (less than 1e-9). 
+
+Relative Difference: 1
+
+Program paused. Press enter to continue.
